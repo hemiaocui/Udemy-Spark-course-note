@@ -67,6 +67,7 @@ mean_val=df.select(mean(df['Sales'])).collect()
 mean_sales=mean_val[0][0]
 df.na.fill(mean_sales,['Sales']).show()
 ```
-
+## Spark Date and Timestamp
 ```
+df=
 ```
