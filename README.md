@@ -4,10 +4,6 @@
 
 Here there are notes and tasks code for Udemy [Spark course](https://www.udemy.com/spark-and-python-for-big-data-with-pyspark/).
 
-# Notes
-
-## Set up
-
 ## Spark Dataframe Basics
 ```
 from pyspark.sql import SparkSession
@@ -209,4 +205,5 @@ pairs=words.map(lamdba word:(word,1))
 word_counts=pairs.reduceByKey(lambda num1, numer2:num1+num2)
 word_counts.pprint()
 ssc.start()
+Example of Tweet streaming
 ```
