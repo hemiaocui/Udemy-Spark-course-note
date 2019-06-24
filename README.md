@@ -196,13 +196,17 @@ rescaled_data=idf_model.transform(featurized_data)
 #also, can use countvectorizer; 
 ```
 
-##Spark Streaming
+## Spark Streaming
 ### Steps: create a sparkcontext, create Streaming context, socket text streaming, read in lines as 'D stream'
 ```
 from pyspark import SparkContext
 from pyspark. streaming import StreamingContext
-sc=SparkContext('local[2]','NetworkWordCount')
-ssc=StreamingContext(sc,1)
-
-
+sc=SparkContext('local[2]','NetworkWordCount') #2 working threads; 'NetworkWordCount' is the name for it; 
+ssc=StreamingContext(sc,1) #take 1 sec at a time;
+lines=ssc.socketTextStrema('localhost',9999) #9999 is the loalhost used; 
+words=lines.flatMap(lambda line: line.split(' '))
+pairs=words.map(lamdba word:(word,1))
+word_counts=pairs.reduceByKey(lambda num1, numer2:num1+num2)
+word_counts.pprint()
+ssc.start()
 ```
